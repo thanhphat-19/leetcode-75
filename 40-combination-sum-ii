@@ -1,0 +1,35 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        # sort the candidates to avoid dupplicate
+        candidates.sort()
+        # init result list
+        res = []
+        # backtrack
+        def backtracking(cur, pos, target):
+            '''
+                current: current combinaion
+                i: index 
+                target
+            '''
+            # found the solution
+            if target == 0:
+                res.append(cur.copy())
+            if target <= 0:
+                return
+            prev = -1 
+            # go though every candidates
+
+            for i in range(pos, len(candidates)):
+                if candidates[i] == prev:
+                    continue
+                cur.append(candidates[i])
+                backtracking(cur, i + 1, target - candidates[i])
+                cur.pop()
+                prev = candidates[i]
+        backtracking([], 0, target)
+        return res
+
+            
+
+        
+        
